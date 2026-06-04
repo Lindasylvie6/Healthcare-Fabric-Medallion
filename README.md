@@ -1,4 +1,4 @@
-# 🏥 Healthcare Analytics — Microsoft Fabric Medallion Architecture
+# 🏥 Healthcare Analytics | Microsoft Fabric Medallion Architecture
 
 ## Project Overview
 End-to-end data engineering project built on Microsoft Fabric using 
