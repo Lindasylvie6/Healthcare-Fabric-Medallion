@@ -8,7 +8,9 @@
 [![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
 [![OneLake](https://img.shields.io/badge/OneLake-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)
 
-End-to-end healthcare data engineering project built on **Microsoft Fabric** using Medallion Architecture (Bronze → Silver → Gold), orchestrated with **Fabric Data Factory**, and designed for **Power BI** consumption.
+End-to-end healthcare data engineering project built on **Microsoft Fabric** with a production-inspired Medallion Architecture
+following industry patterns used in enterprise
+data platforms., orchestrated with **Fabric Data Factory**, and designed for **Power BI** consumption.
 
 This solution processes 552,545 rows across 9 clinical and financial source files , delivering executive-ready dashboards covering revenue cycle, denial management, department performance, and patient risk scoring.
 
@@ -24,7 +26,7 @@ This solution processes 552,545 rows across 9 clinical and financial source file
 - [🥈 Silver Layer](#-silver-layer)
 - [🥇 Gold Layer — Star Schema](#-gold-layer--star-schema)
 - [⚙️ Orchestration](#️-orchestration)
-- [📈 Power BI Dashboard](#-power-bi-dashboard)
+- [📈 Power BI Dashboard](#-Analytics-Consumption-Layer)
 - [💡 Key Engineering Decisions](#-key-engineering-decisions)
 - [📊 Business Insights](#-business-insights)
 - [🔧 Troubleshooting: Composite Key Discovery](#-troubleshooting-composite-key-discovery-in-silver)
@@ -305,22 +307,22 @@ bronze_ingestion  ──On Success──▶  silver_transformation  ──On Suc
 |---|---|---|
 | `daily_schedule` | Schedule | Every day at 6:00 AM ET |
 | `csv_arrival_trigger` | Event-based | Fires on new CSV arrival in `Files/raw_ingestion` in OneLake |
-| Email alert | Failure notification | Sends to Sylvie Linda on any pipeline failure |
+| Email alert | Failure notification | Failure notifications configured through Fabric pipeline alerting. |
 
 The dual-trigger pattern simulates a production scenario where files can arrive ad-hoc between scheduled batch runs, requiring near real-time processing without manual intervention.
 
 ---
 
-## 📈 Power BI Dashboard
+## 📈 Analytics Consumption Layer
 
-4-page interactive dashboard connected to the Lakehouse via SQL Analytics Endpoint:
+The Gold datasets were designed to support:
 
-| Page | Key Metrics |
-|---|---|
-| **Executive Overview** | Total revenue, total patients, denial rate, readmission rate |
-| **Revenue & Claims** | Revenue by payer, monthly trend, collection rates by department |
-| **Denial Management** | Top denial reasons, appeal success rate, denials by payer |
-| **Patient Risk & Readmissions** | High-risk patients, readmission by department and diagnosis |
+- Power BI Semantic Models
+- Fabric SQL Analytics Endpoint
+- Ad-hoc SQL analysis
+- Future reporting workloads
+
+Due to Fabric trial capacity limitations, dashboard implementation was not included in this project. The focus was on building and validating the data platform and analytics data products.
 
 ---
 
