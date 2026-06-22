@@ -10,7 +10,7 @@
 
 End-to-end healthcare data engineering project built on **Microsoft Fabric** using Medallion Architecture (Bronze → Silver → Gold), orchestrated with **Fabric Data Factory**, and designed for **Power BI** consumption.
 
-This solution processes 552,545 rows across 9 clinical and financial source files — delivering executive-ready dashboards covering revenue cycle, denial management, department performance, and patient risk scoring.
+This solution processes 552,545 rows across 9 clinical and financial source files , delivering executive-ready dashboards covering revenue cycle, denial management, department performance, and patient risk scoring.
 
 ---
 
@@ -22,7 +22,7 @@ This solution processes 552,545 rows across 9 clinical and financial source file
 - [📊 Datasets](#-datasets)
 - [🥉 Bronze Layer](#-bronze-layer)
 - [🥈 Silver Layer](#-silver-layer)
-- [🥇 Gold Layer — Star Schema](#-gold-layer--star-schema)
+- [🥇 Gold Layer — Star Schema](#-gold-layer-:star-schema)
 - [⚙️ Orchestration](#️-orchestration)
 - [📈 Power BI Dashboard](#-power-bi-dashboard)
 - [💡 Key Engineering Decisions](#-key-engineering-decisions)
@@ -114,7 +114,7 @@ This platform centralizes clinical and financial data into a governed analytics 
 **Notebook:** `01_bronze_ingestion.ipynb`  
 **Path:** `Files/bronze/{table_name}/part-0.parquet`
 
-The Bronze layer is the **raw landing zone**. No transformations, no business logic — read the CSV and land it safely with two audit columns added.
+The Bronze layer is the **raw landing zone**. No transformations, no business logic , read the CSV and land it safely with two audit columns added.
 
 ```python
 for table_name, file_name in SOURCE_FILES.items():
@@ -131,7 +131,7 @@ for table_name, file_name in SOURCE_FILES.items():
     )
 ```
 
-**Why Parquet over CSV?** Parquet stores column types (int, float, datetime), compresses automatically, and reads 5–10x faster. Every byte written in Bronze is read multiple times downstream — format choice compounds.
+**Why Parquet over CSV?** Parquet stores column types (int, float, datetime), compresses automatically, and reads 5–10x faster. Every byte written in Bronze is read multiple times downstream , format choice compounds.
 
 **Why audit columns?** In production, data lineage and compliance require knowing *when* each row arrived and *from which file*. These columns are available for debugging and watermarking.
 
@@ -208,7 +208,7 @@ These metrics are calculated once in Silver and reused across multiple Gold aggr
 
 ---
 
-## 🥇 Gold Layer — Star Schema
+## 🥇 Gold Layer : Star Schema
 
 **Notebook:** `03_gold_aggregation.ipynb`  
 **Path:** `Files/gold/{table_name}/part-0.parquet`
@@ -288,7 +288,7 @@ for table in gold_tables:
 
 ## ⚙️ Orchestration
 
-**Tool:** Fabric Data Factory — `healthcare_master_pipeline`
+**Tool:** Fabric Data Factory : `healthcare_master_pipeline`
 
 The three notebooks are chained sequentially with `On Success` dependency between each step:
 
@@ -326,17 +326,17 @@ The dual-trigger pattern simulates a production scenario where files can arrive 
 
 ## 💡 Key Engineering Decisions
 
-**1. pandas over PySpark — constraint navigated as a production decision**  
-Spark compute was throttled on a Fabric trial account (HTTP 430 errors). Rather than block the project, the pipeline was redesigned using pandas + pyarrow. The architectural decision — and its production implications (PySpark for scale, Delta for SQL Endpoint) — is documented explicitly. This is the kind of constraint navigation that happens in real engineering environments.
+**1. pandas over PySpark : constraint navigated as a production decision**  
+Spark compute was throttled on a Fabric trial account (HTTP 430 errors). Rather than block the project, the pipeline was redesigned using pandas + pyarrow. The architectural decision — and its production implications (PySpark for scale, Delta for SQL Endpoint)  is documented explicitly. This is the kind of constraint navigation that happens in real engineering environments.
 
 **2. Composite key deduplication discovered through data profiling**  
 `diagnosis_id`, `procedure_id`, and `lab_id` appeared to be primary keys but were actually category codes. Deduplicating on the ID alone would have silently dropped valid records. See the [Troubleshooting](#-troubleshooting-composite-key-discovery-in-silver) section below.
 
 **3. Audit columns at every layer**  
-`_bronze_load_timestamp`, `_silver_load_timestamp`, `_gold_load_timestamp` carried through each layer for lineage. Dropped at each transition so only the current layer's timestamp is retained — clean, predictable schema at every stage.
+`_bronze_load_timestamp`, `_silver_load_timestamp`, `_gold_load_timestamp` carried through each layer for lineage. Dropped at each transition so only the current layer's timestamp is retained  clean, predictable schema at every stage.
 
 **4. Derived metrics pushed down to Silver**  
-`unpaid_amount` and `collection_rate` are calculated once in Silver and reused across multiple Gold aggregations — avoids redundant computation and keeps Gold transformation logic readable.
+`unpaid_amount` and `collection_rate` are calculated once in Silver and reused across multiple Gold aggregations to avoids redundant computation and keeps Gold transformation logic readable.
 
 **5. Dual-trigger orchestration**  
 Both a daily schedule (batch refresh) and an OneLake file-arrival event trigger are configured. This pattern ensures stale data is never served beyond 24 hours while also enabling immediate processing when new source files arrive mid-day.
@@ -345,12 +345,12 @@ Both a daily schedule (batch refresh) and an OneLake file-arrival event trigger 
 
 ## 📊 Business Insights
 
-1. **Dual-trigger orchestration** enables both batch reliability and near real-time processing
-2. **Composite key finding** — ID columns in source data are not always unique; data profiling is essential before writing dedup logic
-3. **Risk scoring** — patients aged 65+ with multiple readmissions and chronic diagnoses represent the highest intervention priority
-4. **Collection rate variance by payer** — revenue leakage can be measured and tracked at the insurance provider level
-5. **Appeal success rate** — high appeal win rates suggest many initial denials are incorrect; a process improvement opportunity similar to the Azure project finding of 80% appeal success
-6. **Readmission clustering** — specific diagnoses and departments drive disproportionate readmission rates, visible in `gold_readmission_by_diag`
+1. **Dual-trigger orchestration** : enables both batch reliability and near real-time processing
+2. **Composite key finding** : ID columns in source data are not always unique; data profiling is essential before writing dedup logic
+3. **Risk scoring** : patients aged 65+ with multiple readmissions and chronic diagnoses represent the highest intervention priority
+4. **Collection rate variance by payer** : revenue leakage can be measured and tracked at the insurance provider level
+5. **Appeal success rate** : high appeal win rates suggest many initial denials are incorrect; a process improvement opportunity similar to the Azure project finding of 80% appeal success
+6. **Readmission clustering** : specific diagnoses and departments drive disproportionate readmission rates, visible in `gold_readmission_by_diag`
 
 ---
 
@@ -365,13 +365,13 @@ During Silver deduplication for `diagnoses`, `procedures`, and `lab_tests`, init
 df = df.drop_duplicates(subset=["diagnosis_id"])
 ```
 
-Row counts dropped significantly — more than expected for a dedup operation.
+Row counts dropped significantly more than expected for a dedup operation.
 
 ---
 
 ### Root Cause Investigation
 
-**Step 1 — Sample the data**
+**Step 1 : Sample the data**
 
 ```python
 df = pd.read_parquet(f"{BRONZE_PATH}/diagnoses/part-0.parquet")
@@ -380,7 +380,7 @@ print(df["diagnosis_id"].value_counts().head(10))
 
 **Result:** Many `diagnosis_id` values appeared dozens of times ❌
 
-**Step 2 — Understand the column**
+**Step 2 : Understand the column**
 
 ```python
 # How many unique diagnosis_ids exist?
@@ -408,10 +408,10 @@ Deduplicating on the code alone would collapse all encounters with the same diag
 Composite key deduplication using both the code and the encounter context:
 
 ```python
-# WRONG — collapses all encounters with the same diagnosis code into one row
+# WRONG : collapses all encounters with the same diagnosis code into one row
 df = df.drop_duplicates(subset=["diagnosis_id"])
 
-# CORRECT — a patient can legitimately have the same diagnosis in a different encounter
+# CORRECT : a patient can legitimately have the same diagnosis in a different encounter
 df = df.drop_duplicates(subset=["diagnosis_id", "encounter_id"])
 ```
 
@@ -432,10 +432,10 @@ df = df.drop_duplicates(subset=["lab_id", "encounter_id"])
 
 ### Key Learnings
 
-1. **Column names are not documentation** — `_id` suffix does not guarantee uniqueness; always profile before writing dedup logic
-2. **Data profiling before transformation** — `value_counts()` on assumed key columns should be a standard first step in Silver
-3. **Silent data loss** — deduplicating on a non-unique key silently drops valid rows with no error; row count validation catches this
-4. **Domain knowledge matters** — understanding that `diagnosis_code` is a clinical classification (ICD-10) rather than a surrogate key changes the entire dedup strategy
+1. **Column names are not documentation** : `_id` suffix does not guarantee uniqueness; always profile before writing dedup logic
+2. **Data profiling before transformation** : `value_counts()` on assumed key columns should be a standard first step in Silver
+3. **Silent data loss** : deduplicating on a non-unique key silently drops valid rows with no error; row count validation catches this
+4. **Domain knowledge matters** : understanding that `diagnosis_code` is a clinical classification (ICD-10) rather than a surrogate key changes the entire dedup strategy
 
 ### Prevention
 
@@ -499,9 +499,9 @@ Healthcare-Fabric-Medallion/
 
 ## 👤 Author
 
-**Sylvie Linda** — Data Analyst → Data Engineer  
-Indianapolis, IN
+**Sylvie Linda** : I'm a Data Engineer focused on building cloud-native data platforms using Microsoft Fabric, Azure, SQL, Python, and modern data engineering practices.
 
+I enjoy transforming complex operational data into reliable, business-ready datasets that drive decision-making.
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Lindasylvie6)
 
