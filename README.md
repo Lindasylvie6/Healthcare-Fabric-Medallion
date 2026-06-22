@@ -1,4 +1,4 @@
-# 🏥 Healthcare Analytics Platform — Microsoft Fabric
+# 🏥 Healthcare Analytics Platform | Microsoft Fabric
 
 [![Microsoft Fabric](https://img.shields.io/badge/Microsoft_Fabric-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://fabric.microsoft.com)
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
