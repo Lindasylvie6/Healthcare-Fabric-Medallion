@@ -26,7 +26,7 @@ This solution processes 552,545 rows across 9 clinical and financial source file
 - [🥈 Silver Layer](#-silver-layer)
 - [🥇 Gold Layer : Star Schema](#-gold-layer-star-schema)
 - [⚙️ Orchestration](#️-orchestration)
-- [📈 Power BI Dashboard](#-Analytics-Consumption-Layer)
+- [📈 Analytics Consumption Layer](#-Analytics-Consumption-Layer)
 - [💡 Key Engineering Decisions](#-key-engineering-decisions)
 - [📊 Business Insights](#-business-insights)
 - [🔧 Troubleshooting: Composite Key Discovery](#-troubleshooting-composite-key-discovery-in-silver)
