@@ -22,7 +22,7 @@ This solution processes 552,545 rows across 9 clinical and financial source file
 - [📊 Datasets](#-datasets)
 - [🥉 Bronze Layer](#-bronze-layer)
 - [🥈 Silver Layer](#-silver-layer)
-- [🥇 Gold Layer — Star Schema](#-gold-layer:-star-schema)
+- [🥇 Gold Layer — Star Schema](#-gold-layer--star-schema)
 - [⚙️ Orchestration](#️-orchestration)
 - [📈 Power BI Dashboard](#-power-bi-dashboard)
 - [💡 Key Engineering Decisions](#-key-engineering-decisions)
@@ -208,7 +208,7 @@ These metrics are calculated once in Silver and reused across multiple Gold aggr
 
 ---
 
-## 🥇 Gold Layer : Star Schema
+## 🥇 Gold Layer - Star Schema
 
 **Notebook:** `03_gold_aggregation.ipynb`  
 **Path:** `Files/gold/{table_name}/part-0.parquet`
