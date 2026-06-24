@@ -10,7 +10,7 @@
 
 End-to-end healthcare data engineering project built on **Microsoft Fabric** with a production-inspired Medallion Architecture
 following industry patterns used in enterprise
-data platforms., orchestrated with **Fabric Data Factory**, and designed for **Power BI** consumption.
+data platforms, orchestrated with **Fabric Data Factory**, and designed for **Power BI** consumption.
 
 This solution processes 552,545 rows across 9 clinical and financial source files , delivering executive-ready dashboards covering revenue cycle, denial management, department performance, and patient risk scoring.
 
