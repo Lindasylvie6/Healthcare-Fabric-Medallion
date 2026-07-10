@@ -9,7 +9,7 @@ reviewed, working code.
 
 > **Plain-English version:** Fabric is wired to Azure DevOps the same way a Google Doc is wired
 > to version history. Every pipeline, notebook, and lakehouse becomes a file in the repo. I never
-> edit the live copy directly — I branch, make my change, open a pull request, get it reviewed,
+> edit the live copy directly: I branch, make my change, open a pull request, get it reviewed,
 > and only then does it merge and get promoted to Production.
 
 ---
@@ -32,10 +32,10 @@ serialized to a folder and versioned automatically:
 
 When a notebook is changed in Fabric and committed, Git stores the source as `notebook-content.py`
 (visible in the commit history). This means notebook logic is diffable and reviewable like any
-other code — not locked inside a binary.
+other code, not locked inside a binary.
 
 > **Why it matters:** Serializing Fabric items to Git gives full **version history, rollback, and
-> code review** on data pipelines and notebooks — the same discipline software teams apply to
+> code review** on data pipelines and notebooks, the same discipline software teams apply to
 > application code.
 
 ---
@@ -52,13 +52,13 @@ main
  └─▶ healthcarebranch1        # feature branch created for a change
         │  add UTC timezone   # commit: switch load timestamps from local time to UTC
         ▼
-   Pull Request #1  ──review──▶  Merge into main   ✅
+   Pull Request #1  review──▶  Merge into main   ✅
 ```
 
-**Example — Pull Request #1: `add UTC timezone`**
+**Example : Pull Request #1: `add UTC timezone`**
 Audit timestamps (`_bronze_load_timestamp`, `_silver_load_timestamp`) were originally written in
 local time. They were switched to **UTC** on a feature branch, because storing timestamps in UTC
-removes ambiguity across regions and daylight-saving changes — a data engineering best practice.
+removes ambiguity across regions and daylight-saving changes, a data engineering best practice.
 The change was committed, opened as PR #1, reviewed, and merged into `main`.
 
 > **Why it matters:** The pull request is a safety gate. A broken change stays on the branch and
@@ -66,7 +66,7 @@ The change was committed, opened as PR #1, reviewed, and merged into `main`.
 
 ---
 
-### 3. CI/CD — Fabric Deployment Pipelines (Dev → Test → Prod)
+### 3. CI/CD : Fabric Deployment Pipelines (Dev → Test → Prod)
 
 [#3-cicd--fabric-deployment-pipelines-dev--test--prod](#3-cicd--fabric-deployment-pipelines-dev--test--prod)
 
