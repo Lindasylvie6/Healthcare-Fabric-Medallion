@@ -61,7 +61,7 @@ Healthcare organizations lose revenue to denied claims, delayed reimbursements, 
 
 ## 🏗️ Architecture
 
-![Medallion Architecture](docs/Fabric_medallion_Architecture.png)
+![Medallion_Architecture](docs/Medallion_Architecture.png)
 
 ```
 ADLS + source files
