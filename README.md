@@ -8,7 +8,7 @@
 [![SQL](https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://learn.microsoft.com/en-us/fabric/data-warehouse/sql-analytics-endpoint)
 [![OneLake](https://img.shields.io/badge/OneLake-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)
 
-A production-shaped, end-to-end healthcare data engineering platform on **Microsoft Fabric**. A single **master pipeline** orchestrates the full run — metadata-driven ingestion, **Delta** transformation, and an automated **semantic model refresh** — across a Medallion Architecture, with everything **source-controlled in Azure DevOps** and promoted through a **Development → Test → Production** deployment pipeline.
+A production-shaped, end-to-end healthcare data engineering platform on **Microsoft Fabric**. A single **master pipeline** orchestrates the full run-metadata-driven ingestion, **Delta** transformation, and an automated **semantic model refresh**  across a Medallion Architecture, with everything **source-controlled in Azure DevOps** and promoted through a **Development → Test → Production** deployment pipeline.
 
 The platform processes 552,545 rows across 9 clinical and financial datasets and delivers executive-ready Power BI analytics covering revenue at risk, denial management, department performance, clinical quality, and payer revenue.
 
