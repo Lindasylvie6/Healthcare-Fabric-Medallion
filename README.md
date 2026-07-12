@@ -251,7 +251,6 @@ Denial rates by reason and payer with appeal outcomes — a direct process-impro
 ![Department Performance Dashboard](docs/clinical_quality.png)
 Length of stay, readmission rates, cost by department, and clinical quality indicators.
 
-> Screenshots live in `docs/`. Add each PNG using the filenames above.
 
 ---
 
