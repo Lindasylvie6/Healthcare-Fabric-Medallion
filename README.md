@@ -236,7 +236,7 @@ Building Gold as views keeps business logic in version-controlled SQL, avoids du
 The Gold views feed a Power BI **semantic model** (`healthcare_gold_model`), refreshed automatically as the final step of `Master_Pipeline` (the **Gold Semantic model refresh** activity) so dashboards are always current after a run. Dashboards built on the model:
 
 ### Executive Summary
-![Executive Summary Dashboard](docs/dashboard_executive_overview.png)
+![Executive Summary Dashboard](docs/executive_overview.png)
 Top-line KPIs across revenue, denials, and department performance for leadership.
 
 ### Revenue & Revenue at Risk
@@ -244,7 +244,7 @@ Top-line KPIs across revenue, denials, and department performance for leadership
 Revenue and collection rate by insurer, with at-risk (unpaid) revenue broken out by department.
 
 ### Denial Management
-![Denial Management Dashboard](docs/denial_managment.png)
+![Denial Management Dashboard](docs/denial_management.png)
 Denial rates by reason and payer with appeal outcomes — a direct process-improvement signal.
 
 ### Department Performance & Clinical Quality
